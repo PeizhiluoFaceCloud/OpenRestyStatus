@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>项目状态</title>
+	<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+</head>
+<body>
+<div>
+    <p>项目名字: {{ ProjectName }}</p>
+    <p>注册开始时间: {{ RegisterBegin }} 注册结束时间: {{ RegisterEnd }}</p>
+    <p>签到开始时间: {{ CheckBegin }} 签到结束时间: {{ CheckEnd }}</p>
+    <p>当前注册人数: {{ RegisterNum }} 当前签到人数: {{ CheckNum }}</p>
+    <table class="table  table-bordered">
+       <caption>状态信息表</caption>
+       <thead>
+          <tr>
+             <th>状态</th>
+             <th>姓名</th>
+             <th>电话</th>
+             <th>邮箱</th>
+             <th>报名时间</th>
+             <th>签到时间</th>
+          </tr>
+       </thead>
+       <tbody>
+            {% for k, obj in pairs(UserRecords) do %}
+            <tr>
+                <td>{{obj.Status}}</td>
+                <td>{{obj.Name}}</td>
+                <td>{{obj.PhoneNumber}}</td>
+                <td>{{obj.Email}}</td>
+                <td>{{obj.RegisterTime}}</td>
+                <td>{{obj.CheckTime}}</td>
+            </tr>
+            {% end %}
+       </tbody>
+    </table>
+</div>
+</body>
+</html>
