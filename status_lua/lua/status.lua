@@ -27,8 +27,6 @@ local template = require("resty.template")
 --[基本变量参数]
 local redis_ip = nil
 local redis_port = 6379
-local register_ip = nil
-local register_port = 8000
 
 function send_resp_string (resp_str)
 	--HTTP应答头统一都是OK，这样便于查找是应用错误，还是系统错误
@@ -163,11 +161,6 @@ local function load_config_info()
     redis_ip = ngx.shared.shared_data:get("RedisIP")
 	if redis_ip == nil  then
 		ngx.log(ngx.ERR,"get RedisIP failed ")
-        return false
-	end
-    register_ip = ngx.shared.shared_data:get("RegisterServer")
-	if register_ip == nil  then
-		ngx.log(ngx.ERR,"get RegisterServer failed ")
         return false
 	end
 	return true
