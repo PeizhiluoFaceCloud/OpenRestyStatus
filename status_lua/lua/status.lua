@@ -115,7 +115,7 @@ function process_msg()
     for i=1,#user_lists do
         --print(user_lists[i])
         local user_key = user_lists[i]
-        local user_info, err = red_handler:hmget(user_key,"Status","Name","Email","RegisterTime","CheckTime")
+        local user_info, err = red_handler:hmget(user_key,"Status","Name","Email","RegisterTime","CheckTime","Other")
         if not user_info then
             ngx.log(ngx.ERR, "get user_info failed : ", user_key,err)
             return send_resp_string("<p>get user_info failed</p>")
@@ -128,6 +128,7 @@ function process_msg()
         object["Email"] = user_info[3]
         object["RegisterTime"] = user_info[4]
         object["CheckTime"] = user_info[5]
+        object["Other"] = user_info[6]
         if(object["Status"] == "Checked") then
             check_num = check_num + 1
         end
