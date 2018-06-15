@@ -126,8 +126,12 @@ function process_msg()
         object["Name"] = user_info[2]
         object["PhoneNumber"] = string.sub(user_key,string.len("project:"..project_name..":user:")+1)
         object["Email"] = user_info[3]
-        object["RegisterTime"] = user_info[4]
-        object["CheckTime"] = user_info[5]
+        --object["RegisterTime"] = user_info[4]
+        --object["CheckTime"] = user_info[5]
+        --强制加上8小时，调成北京时间。
+        --因为docker容器中，没有指定时区
+        object["RegisterTime"] = os.date("%Y-%m-%d %H:%M:%S",string2time(user_info[4])+8*3600)
+        object["CheckTime"] = os.date("%Y-%m-%d %H:%M:%S",string2time(user_info[5])+8*3600)
         object["Other"] = user_info[6]
         if(object["Status"] == "Checked") then
             check_num = check_num + 1
